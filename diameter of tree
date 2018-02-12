@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+// for finding diameter we assume first diameter passes through the root node else diameter is max of left sub tree height and right subtree height
+// node intialisation
+struct node
+{
+int data;
+struct node*left;
+struct node*right;
+};
+int max(int a,int b)
+{
+if(a>b)
+return a;
+else
+return b;
+}
+struct node*newnode(int data)
+{
+struct node*node=(struct node*)malloc(sizeof(struct node));
+node->data=data;
+node->left=NULL;
+node->right=NULL;
+}
+int height(struct node*n)
+{
+if(n==NULL)
+return 0;
+int leftheight=height(n->left);
+int rightheight=height(n->right);
+if(leftheight>rightheight)
+return 1+leftheight;
+else
+return 1+rightheight;
+}
+int diameter(struct node*n)
+{
+if(n==NULL)
+return 0;
+return max( height(n->left)+1+height(n->right),max(diameter(n->left),diameter(n->right)));
+}
+int main()
+{
+struct node*root=newnode(1);
+root->left=newnode(2);
+root->right=newnode(3);
+root->left->left=newnode(4);
+root->left->left->left=newnode(5);
+int d=diameter(root);
+printf("diameter of tree is%d",d);
+return 0;
+}
