@@ -1,3 +1,4 @@
+//implementation of stack data structures using array
 #include<stdio.h>
 #include<iostream>
 #include<conio.h>
