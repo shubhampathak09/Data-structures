@@ -1,0 +1,41 @@
+// we will calculate the height of a tree
+#include<stdio.h>
+#include<stdlib.h>
+// tree node definition
+struct node
+{
+int data;
+struct node*left;
+struct node*right;
+};
+// function to create node with integer value
+struct node*createnode(int data)
+{
+struct node*node=(struct node*)malloc(sizeof(struct node));
+node->data=data;
+node->left=NULL;
+node->right=NULL;
+}
+//function that will return the height of tree
+int height(struct node *node)
+{
+if(node==NULL)
+return 0;
+int leftheight=height(node->left);
+int rightheight=height(node->right);
+if(leftheight>rightheight)
+return 1+leftheight;
+else
+return 1+rightheight;
+}
+int main()
+{
+struct node*root=createnode(1);
+root->left=createnode(2);
+root->right=createnode(3);
+root->left->left=createnode(4);
+root->left->left->right=createnode(5);
+int h=height(root);
+printf("the height of tree is..%d",h);
+return 0;
+}
