@@ -1,0 +1,44 @@
+ //identicallity of two trees
+ #include<iostream>
+ using namespace std;
+ #include<stdio.h>
+ #include<stdlib.h>
+ struct node
+ {
+ 	int data;
+ 	struct node*left;
+ 	struct node*right;
+ };
+ struct node*createnode(int data)
+ {
+ 	struct node*node=(struct node*)malloc(sizeof(struct node));
+ 	node->data=data;
+ 	node->left=NULL;
+ 	node->right=NULL;
+ }
+ bool identical(struct node*n1,struct node *n2)
+ {
+ 	if(n1==NULL&&n2==NULL)
+ 	return true;
+ 	if(n1!=NULL&&n2!=NULL)
+ 	{
+ 		return (n1->data==n2->data)&&identical(n1->left,n2->left)&&identical(n1->right,n2->right);
+	 }
+	 else
+	 return 0;
+ }
+ int main()
+ {
+ 	struct node*root1,*root2;
+ 	root1=createnode(1);
+ 	root1->left=createnode(2);
+ 	root1->right=createnode(3);
+ 	root2=createnode(1);
+ 	root2->left=createnode(2);
+ 	root2->right=createnode(4);
+ 	if(identical(root1,root2))
+ 	printf("given two trees are identical");
+ 	else
+   printf("not identical");	
+ 	
+ }
