@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+#define max_size 10
+using namespace std;
+class stack
+{
+public:
+int a[max_size];
+int top;
+stack()
+{
+top=-1;  //constructor intialisation
+}
+bool isfull()
+{
+if(top==max_size-1)
+return true;
+else return false;
+}
+bool isempty()
+{
+if(top<0)
+return true;
+else
+return false;
+}
+void push(int x)
+{ 
+if(isfull())
+return ;
+top=top+1;
+a[top]=x;
+}
+int pop()
+{
+if(isempty())
+return 0;
+int x=a[top];
+top=top-1;
+return x;
+}
+};
+stack s1,s2;
+void enqueue(int z)
+{
+s1.push(z);
+}
+int dequeue()
+{
+while(!s1.isempty())
+{
+s2.push(s1.pop());
+}
+return s2.pop();
+}
+int main()
+{
+enqueue(5);
+enqueue(4);
+enqueue(3);
+cout<<dequeue()<<endl; //first in first out
+cout<<dequeue();
+}
