@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node*left;
+	struct node*right;
+};
+struct node*createnode(int data)
+{
+	struct node*node=(struct node*)malloc(sizeof(struct node));
+	node->data=data;
+	node->left=NULL;
+	node->right=NULL;
+};
+int height(struct node *node)
+{
+	if(node==NULL)
+	return 0;
+	int lh=height(node->left);
+	int rh=height(node->left);
+	if(lh>rh)
+	return 1+lh;
+	else
+	return 1+rh;
+}
+void printatlevel(struct node*node,int level)
+{
+	if(node==NULL)
+	return;
+	if(level==1)
+	printf("%d",node->data);
+	if(level>1)
+{
+	
+
+	printatlevel(node->left,level-1);
+	printatlevel(node->right->left,level-1);
+}
+}
+void printleftview(struct node*node)
+{
+	if(node==NULL)
+	return;
+	int h=height(node);
+	int i;
+	for(i=1;i<=h;i++)
+	printatlevel(node,i);
+}
+int main()
+{
+	struct node*root=createnode(1);
+	root->left=createnode(2);
+	root->right=createnode(6);
+	root->left->left=createnode(4);
+	root->left->right=createnode(3);
+	root->left->right->left=createnode(5);
+	printleftview(root);
+}
