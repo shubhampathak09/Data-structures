@@ -1,0 +1,50 @@
+//finding the mirror of a tree
+#include<iostream>
+using namespace std;
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node*left;
+	struct node*right;
+};
+struct node*createnode(int data)
+{
+	struct node*node=(struct node*)malloc(sizeof(struct node));
+	node->data=data;
+	node->left=NULL;
+	node->right=NULL;
+}
+void convertmirror(struct node*root)
+{
+	if(root)
+	{
+		convertmirror(root->left);
+		convertmirror(root->right);
+		struct node*temp;
+		temp=root->left;
+		root->left=root->right;
+		root->right=temp;
+	}
+	return;
+}
+void inorder(struct node*root)
+{
+	if(root==NULL)
+	return;
+	
+	inorder(root->left);
+	printf("%d",root->data);
+	inorder(root->right);
+}
+int main()
+{
+	struct node*root=createnode(1);
+	root->left=createnode(2);
+	root->right=createnode(3);
+	inorder(root);  //traversal of normal tree given
+	printf("\n");
+	convertmirror(root);  //traversal of mirror imag of tree (inorder)
+	inorder(root);
+}
