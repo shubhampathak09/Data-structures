@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+#include<stdlib.h>
+// max window subsum
+int max(int a,int b)
+{
+	if(a>b)
+	return a;
+	else
+	return b;
+}
+int max_window(int a[],int n,int k)
+{
+	int max_sum=INT_MIN;
+	for(int i=0;i<=n-k;i++)
+	{
+		int j=0;
+		int sum=0;
+		while(j<k)
+		{
+			sum=a[i]+sum;
+			j++;
+			i++;
+		}
+		max_sum=max(sum,max_sum);
+	}
+	return max_sum;
+}
+int main()
+{
+	int a[]={5,6,2,1,12,4};
+	int n=sizeof(a)/sizeof(a[0]);
+	int k=2;
+	cout<<max_window(a,n,k);
+}
