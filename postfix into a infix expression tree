@@ -1,0 +1,64 @@
+ #include<bits/stdc++.h>
+using namespace std;
+struct et
+{
+	char data;
+	struct et*left;
+	struct et*right;
+};
+bool isoperator(char c)
+{
+	if(c=='+'||c=='-'||c=='*'||c=='/'||c=='^')
+	return true;
+	else
+	return false;
+}
+struct et*newnode(char d)
+{
+	struct et*node=(struct et*)malloc(sizeof(struct et));
+	node->data=d;
+	node->left=NULL;
+	node->right=NULL;
+}
+void inorder(struct et*node)
+{
+	if(node==NULL)
+	return;
+	inorder(node->left);
+	printf("%c",node->data);  //dont use %d instead of %c
+	inorder(node->right);
+}
+struct et*postordertree(char postfix[])
+{
+	struct et *t,*t1,*t2;
+	stack<et*>st;
+	for(int i=0;i<strlen(postfix);i++)
+	{
+		if(!isoperator(postfix[i]))
+		{
+			t=newnode(postfix[i]);
+			st.push(t);
+		}
+		else
+		{
+			t=newnode(postfix[i]);  // fail to assign a newnode here causes infinite loop
+			t1=st.top();
+			st.pop();
+			t2=st.top();
+			st.pop();
+			t->left=t2;
+			t->right=t1;
+			st.push(t);   //forgot to add this line error.. code crashing
+		}
+	}
+	t=st.top();
+	st.pop();
+	return t;
+}
+int main()
+{
+	char postfix[]="ab+cde+**";
+	struct et *r;
+	r=postordertree(postfix);
+	inorder(r);
+}
