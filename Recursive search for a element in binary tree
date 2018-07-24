@@ -1,0 +1,41 @@
+// search for an element in the tree recursively
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+	int data;
+	struct node*left;
+	struct node*right;
+};
+struct node*createtree(int data)
+{
+	struct node*node=(struct node*)malloc(sizeof(struct node));
+	node->data=data;
+	node->left=NULL;
+    node->right=NULL;
+    return node;
+}
+int search(struct node*root,int data)
+{
+	if(root==NULL)
+	return 0;  //base case
+	if(root->data==data)
+	return 1;
+	return search(root->right,data)||search(root->left,data); 
+}
+int main(){
+	int n;
+	struct node*root;
+	root=createtree(1);
+	root->left=createtree(2);
+	root->right=createtree(3);
+	root->left->left=createtree(4);
+	root->left->left->right=createtree(6);
+	cout<<"enter an element to be searched ";
+	cin>>n;
+	if(search(root,n))
+	cout<<"element found";
+	else
+	cout<<"element not present";
+	
+}
