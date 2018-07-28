@@ -1,0 +1,50 @@
+ #include<bits/stdc++.h>
+using namespace std;
+class stak
+{
+	private:
+		int curr_size;
+		queue<int>q1,q2;
+		public:
+			stack(int curr_size)
+			{
+				curr_size=0;
+			}
+			void enqueue(int x)
+			{
+				curr_size++;
+					q2.push(x);
+					while(!q1.empty())
+					{
+						q2.push(q1.front());
+						q1.pop();
+					}
+					queue<int>q;
+					q=q1;
+					q1=q2;
+					q2=q;
+			}
+			void dequeue()
+			{
+				cout<<q1.front();
+				q1.pop();
+				curr_size--;
+			}
+			int size()
+			{
+				return curr_size;
+			}
+};
+int main()
+{
+	stak s1;
+	s1.enqueue(1);
+	s1.enqueue(2);
+	s1.enqueue(3);
+	s1.enqueue(4);
+	int x=s1.size();
+	for(int i=1;i<=x;i++)
+	s1.dequeue();
+	 
+ 
+}
